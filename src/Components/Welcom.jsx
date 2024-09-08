@@ -5,5 +5,4 @@ function Welcom() {
         </div>
     )
 }
-
-export default Welcom
+export default Welcom;
