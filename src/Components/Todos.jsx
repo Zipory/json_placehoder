@@ -11,11 +11,43 @@ const Todos = (props) => {
   }, []);
   return (
     <>
-      <div>Todos</div>
+      <h2>Todos</h2>
+      <div className="sort">
+        <button
+          onClick={() => {
+            setTodos((prev) => {
+              const sortedTodos = [...prev].sort((a, b) => a.id - b.id);
+              return sortedTodos;
+            });
+          }}>
+          1 to 2
+        </button>
+        <button
+          onClick={() => {
+            setTodos((prev) => {
+              const sortedTodos = [...prev].sort((a, b) =>
+                a.title.localeCompare(b.title)
+              );
+              return sortedTodos;
+            });
+          }}>
+          A to B
+        </button>
+
+        <button
+          onClick={() => {
+            setTodos((prev) => {
+              const sortedTodos = [...prev].filter((x) => x.completed);
+              return sortedTodos;
+            });
+          }}>
+          checked first
+        </button>
+        <button onClick={() => {}}>Random</button>
+      </div>
       {todos.map((item, i) => (
         <Todo todo={item} key={i} />
       ))}
-      {/* <p>{todos[0]?.title}</p> */}
     </>
   );
 };

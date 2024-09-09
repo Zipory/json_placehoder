@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 const Todo = ({ todo }) => {
   const [completed, setCompleted] = useState(todo.completed);
+  console.log(todo.id, todo.completed);
 
   return (
     <>
