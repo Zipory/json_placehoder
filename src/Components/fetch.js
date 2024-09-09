@@ -1,8 +1,11 @@
-async function Fetch (url, setUser) {
-    console.log(10, "here");
-    let userName = fetch(url)
-    .then(res => res.json())
-    .then(json => setUser(json));
-};
+import { json } from "react-router-dom";
+
+async function Fetch(url, setState) {
+  fetch(url)
+    .then((res) => res.json())
+    .then((json) => {
+      setState(json);
+    });
+}
 
 export default Fetch;
