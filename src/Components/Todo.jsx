@@ -7,7 +7,7 @@ const Todo = ({ todo }) => {
       <h3>Todo:{todo.id}</h3>
       <p>{todo.title}</p>
       <input
-        onClick={() => setCompleted(!completed)}
+        onChange={() => setCompleted(!completed)}
         type="checkbox"
         checked={completed}
       />
