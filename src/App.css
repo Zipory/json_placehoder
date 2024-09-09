@@ -21,6 +21,9 @@ button:hover {
   cursor: pointer;
 }
 
+.todo {
+  border: sandybrown solid 2px;
+}
 
 .App-header {
   background-color: #282c34;
