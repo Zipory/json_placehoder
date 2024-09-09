@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
-import Async from "./Async";
+import Fetch from "./fetch";
 import React , { useState, useEffect, useContext}from 'react';
 import { UserContext } from "../App";
 
+/** update the user info,
+ * return the nav bar.
+ */
 function Home() {
+    {/*-----------------the user url----------------------- */}
     let url = "https://jsonplaceholder.typicode.com/users/1"
+
+    {/*-------------get the global useState-------------------- */}
     const [user, setUser] = useContext(UserContext);
+
+    {/*--------------render the user-info when get it--------------- */}
     useEffect( () => {
-        Async(url,  setUser)    
+        Fetch(url,  setUser)    
     } , [] )
   return (
     <div>

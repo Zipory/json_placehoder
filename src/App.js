@@ -8,6 +8,7 @@ import Posts from "./Posts";
 import Albums from "./Components/Albums";
 import Todos from "./Components/Todos";
 
+/*------------the main user------------------- */
 export const UserContext = createContext()
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <button>
           <Link to={"/"}>Home</Link>
         </button>
+        
+         {/*--------------make user global-------------------- */}
         <UserContext.Provider value={[user, setUser]}>
       <Routes>
         <Route path="/" element={<Home />} />
