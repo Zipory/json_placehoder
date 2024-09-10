@@ -7,7 +7,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import Posts from "./Posts";
 import Albums from "./Components/Albums";
 import Todos from "./Components/Todos";
+
 import Photos from "./Components/Photos";
+
+
+import NewTodo from "./Components/NewTodo";
 
 /*------------the main user------------------- */
 export const UserContext = createContext();
@@ -35,9 +39,17 @@ function App() {
             </Route>
            
             <Route path="/albums" element={<Albums />} />
+
             <Route path="/todos" element={<Todos />} />
             <Route path="/photos" element={<Photos /> } />
            
+
+            <Route path="/todos">
+              <Route index element={<Todos />} />
+              {/* <Route path="new" element={<NewTodo />} /> */}
+            </Route>
+
+
             <Route path="*" element={<h1>Error 404 page not found</h1>} />
           </Routes>
           </AlbumId.Provider>
