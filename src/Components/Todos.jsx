@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import Fetch from "./fetch";
 import Todo from "./Todo";
-
+import NewTodo from "./NewTodo";
+import DeletTodo from "./DeletTodo";
 let prevLen = 0;
 
 const Todos = (props) => {
+  const [newTodo, setNewTodo] = useState(false);
+  const [deletTodo, setDeletTodo] = useState(false);
   const [todos, setTodos] = useState([]);
   const url = "https://jsonplaceholder.typicode.com/todos?userId=1";
 
@@ -20,14 +23,14 @@ const Todos = (props) => {
     <>
       <h2>Todos</h2>
       <div className="sort">
+        <button onClick={() => setMiniTodos([...todos])}>All</button>
         <button
           onClick={() => {
             setMiniTodos((prev) => {
               const sortedTodos = [...prev].sort((a, b) => a.id - b.id);
               return sortedTodos;
             });
-          }}
-        >
+          }}>
           1 to 2
         </button>
         <button
@@ -38,8 +41,7 @@ const Todos = (props) => {
               );
               return sortedTodos;
             });
-          }}
-        >
+          }}>
           A to B
         </button>
 
@@ -50,8 +52,7 @@ const Todos = (props) => {
               const falseTodos = [...prev].filter((x) => !x.completed);
               return [...sortedTodos, ...falseTodos];
             });
-          }}
-        >
+          }}>
           checked first
         </button>
         <button
@@ -73,8 +74,7 @@ const Todos = (props) => {
               }
               return temp;
             });
-          }}
-        >
+          }}>
           Random
         </button>
         <div>
@@ -90,8 +90,34 @@ const Todos = (props) => {
             placeholder="input search value / id"
             ref={search}
           />
+          <button
+            onClick={() => {
+              setMiniTodos(() => [...todos]);
+              setMiniTodos((prev) => [...prev].filter((x) => x.completed));
+            }}>
+            Checked only
+          </button>
+          <button
+            onClick={() => {
+              setMiniTodos(() => [...todos]);
+              setMiniTodos((prev) => [...prev].filter((x) => !x.completed));
+            }}>
+            Not checked only
+          </button>
+        </div>
+        <div>
+          <button onClick={() => setNewTodo(!newTodo)}>Creat New Todo</button>
+          <button
+            onClick={() => {
+              setDeletTodo(!deletTodo);
+              console.log(deletTodo);
+            }}>
+            Delet Todo
+          </button>
         </div>
       </div>
+      {newTodo && <NewTodo setTodos={setTodos} length={todos.length + 1} />}
+      {/* {deletTodo && <DeletTodo setTodos={setTodos} />} */}
       {miniTodos.map((item, i) => (
         <Todo todo={item} key={i} />
       ))}
@@ -102,8 +128,7 @@ const Todos = (props) => {
 function searchMe(setMiniTodos, value) {
   setMiniTodos((prev) =>
     [...prev]?.filter(
-      (item) =>
-        item.title?.includes(value) || `${item.id}`.includes(value)  
+      (item) => item.title?.includes(value) || `${item.id}`.includes(value)
     )
   );
 }
