@@ -5,6 +5,7 @@ async function Fetch(url, setState) {
     .then((res) => res.json())
     .then((json) => {
       setState(json);
+      // console.log(json);
     });
 }
 

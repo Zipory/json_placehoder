@@ -7,13 +7,14 @@ import { Routes, Route, Link } from "react-router-dom";
 import Posts from "./Posts";
 import Albums from "./Components/Albums";
 import Todos from "./Components/Todos";
+import Photos from "./Components/Photos";
 
 /*------------the main user------------------- */
 export const UserContext = createContext();
-
+export const AlbumId = createContext();
 function App() {
   const [user, setUser] = useState("");
-
+  const [albumId, setAlbumId] = useState(1);
   return (
     <div className="App">
       <header className="App-header">
@@ -26,15 +27,20 @@ function App() {
 
         {/*--------------make user global-------------------- */}
         <UserContext.Provider value={[user, setUser]}>
+        <AlbumId.Provider value={[albumId, setAlbumId]}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/posts" element={<Posts />}>
               <Route path="/posts/some" element={<h1>Some</h1>} />
             </Route>
+           
             <Route path="/albums" element={<Albums />} />
             <Route path="/todos" element={<Todos />} />
+            <Route path="/photos" element={<Photos /> } />
+           
             <Route path="*" element={<h1>Error 404 page not found</h1>} />
           </Routes>
+          </AlbumId.Provider>
         </UserContext.Provider>
       </header>
     </div>
