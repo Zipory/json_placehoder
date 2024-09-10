@@ -117,7 +117,7 @@ const Todos = (props) => {
         </div>
       </div>
       {newTodo && <NewTodo setTodos={setTodos} length={todos.length + 1} />}
-      {/* {deletTodo && <DeletTodo setTodos={setTodos} />} */}
+      {deletTodo && <DeletTodo setTodos={setTodos} />}
       {miniTodos.map((item, i) => (
         <Todo todo={item} key={i} />
       ))}
