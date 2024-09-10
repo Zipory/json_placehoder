@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const Todo = ({ todo }) => {
+const Todo = ({ todo, setTodoCLicked }) => {
   const [completed, setCompleted] = useState();
 
   useEffect(() => setCompleted(todo.completed), [todo]);
@@ -7,7 +7,7 @@ const Todo = ({ todo }) => {
     <div
       className="todo"
       onClick={() => {
-        console.log(todo.id);
+        setTodoCLicked(todo.id);
       }}>
       <h3>Todo: {todo.id}</h3>
       <input

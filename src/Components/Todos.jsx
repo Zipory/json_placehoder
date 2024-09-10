@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import Fetch from "./fetch";
 import Todo from "./Todo";
 import NewTodo from "./NewTodo";
-import DeletTodo from "./DeletTodo";
 let prevLen = 0;
 
 const Todos = (props) => {
   const [newTodo, setNewTodo] = useState(false);
-  const [deletTodo, setDeletTodo] = useState(false);
+  const [editTodo, setEditodo] = useState(false);
+  const [todoClicked, setTodoCLicked] = useState(-1);
   const [todos, setTodos] = useState([]);
   const url = "https://jsonplaceholder.typicode.com/todos?userId=1";
 
@@ -19,6 +19,7 @@ const Todos = (props) => {
     setMiniTodos(todos);
   }, [todos]);
   let search = useRef(0);
+  let editText = useRef("");
   return (
     <>
       <h2>Todos</h2>
@@ -106,20 +107,55 @@ const Todos = (props) => {
           </button>
         </div>
         <div>
-          <button onClick={() => setNewTodo(!newTodo)}>Creat New Todo</button>
           <button
             onClick={() => {
-              setDeletTodo(!deletTodo);
-              console.log(deletTodo);
+              setEditodo(false);
+              setNewTodo(!newTodo);
             }}>
-            Delet Todo
+            Creat New Todo
           </button>
         </div>
       </div>
-      {newTodo && <NewTodo setTodos={setTodos} length={todos.length + 1} />}
-      {deletTodo && <DeletTodo setTodos={setTodos} />}
+      <div>
+        {newTodo && <NewTodo setTodos={setTodos} length={todos.length + 1} />}
+        <button
+          onClick={() => {
+            setNewTodo(false);
+            setEditodo(false);
+            if (todoClicked !== -1) {
+              setTodos((prev) =>
+                [...prev].filter((todo) => todo.id !== todoClicked)
+              );
+              console.log("deleted", todoClicked);
+              setTodoCLicked(-1);
+            }
+          }}>
+          Delet
+        </button>
+        <button
+          onClick={() => {
+            setNewTodo(false);
+            setEditodo((prev) => !prev);
+          }}>
+          Edit
+        </button>
+        {editTodo && <input type="text" ref={editText} /> && (
+          <button
+            onClick={() => {
+              toEdit(
+                todoClicked,
+                setTodoCLicked,
+                setTodos,
+                setEditodo,
+                editText
+              );
+            }}>
+            Change
+          </button>
+        )}
+      </div>
       {miniTodos.map((item, i) => (
-        <Todo todo={item} key={i} />
+        <Todo setTodoCLicked={setTodoCLicked} todo={item} key={i} />
       ))}
     </>
   );
@@ -134,3 +170,18 @@ function searchMe(setMiniTodos, value) {
 }
 
 export default Todos;
+
+function toEdit(todoClicked, setTodoCLicked, setTodos, setEditodo, editText) {
+  if (todoClicked !== -1) {
+    // return;
+    setTodos((prev) => {
+      const todoEdit = [...prev].find((item) => item.id === todoClicked);
+      todoEdit.title = editText.current.value;
+      [...prev].splice(todoClicked - 1, 1);
+      return [...prev, todoEdit];
+    });
+
+    setEditodo(false);
+    setTodoCLicked(-1);
+  }
+}
