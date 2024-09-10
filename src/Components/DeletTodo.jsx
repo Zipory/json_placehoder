@@ -4,22 +4,27 @@ const DeletTodo = (props) => {
   let id = useRef(-1);
 
   const setTodos = props.setTodos;
-
+  const length = props.length;
   return (
     <>
       <div>DeletTodo</div>
-      <input ref={id} type="number">
-        Choose your todo
-      </input>
+      <input
+        ref={id}
+        type="number"
+        placeholder="Choose your todo"
+        min={1}
+        max={length}
+      />
+
       <button
         onClick={() => {
-          if (id.current.value !== -1) {
-            setTodos((prev) =>
-              [...prev].filter((todo) => todo.id !== id.current.value)
-            );
-            console.log("delet", id.current.value);
+          let posDel = -1;
+          posDel = Number(id.current.value);
+          console.log(typeof posDel);
 
-            id.current.value = -1;
+          if (posDel !== -1) {
+            setTodos((prev) => [...prev].filter((todo) => todo.id !== posDel));
+            console.log("deleted", posDel);
           }
         }}>
         Delet
