@@ -30,6 +30,10 @@ button:hover {
   cursor: pointer;
 }
 
+.link {
+  color: #61dafb;
+}
+
 .todo {
   border: sandybrown solid 2px;
 }
