@@ -6,7 +6,7 @@ let prevLen = 0;
 
 const Todos = (props) => {
   const [newTodo, setNewTodo] = useState(false);
-  const [editTodo, setEditodo] = useState(false);
+  // const [editTodo, setEditodo] = useState(false);
   const [todoClicked, setTodoCLicked] = useState(-1);
   const [todos, setTodos] = useState([]);
   const url = "https://jsonplaceholder.typicode.com/todos?userId=1";
@@ -19,7 +19,7 @@ const Todos = (props) => {
     setMiniTodos(todos);
   }, [todos]);
   let search = useRef(0);
-  let editText = useRef("");
+  // let editText = useRef("");
   return (
     <>
       <h2>Todos</h2>
@@ -109,7 +109,7 @@ const Todos = (props) => {
         <div>
           <button
             onClick={() => {
-              setEditodo(false);
+              // setEditodo(false);
               setNewTodo(!newTodo);
             }}>
             Creat New Todo
@@ -121,7 +121,7 @@ const Todos = (props) => {
         <button
           onClick={() => {
             setNewTodo(false);
-            setEditodo(false);
+            // setEditodo(false);
             if (todoClicked !== -1) {
               setTodos((prev) =>
                 [...prev].filter((todo) => todo.id !== todoClicked)
@@ -132,14 +132,14 @@ const Todos = (props) => {
           }}>
           Delet
         </button>
-        <button
+        {/* <button
           onClick={() => {
             setNewTodo(false);
-            setEditodo((prev) => !prev);
+            // setEditodo((prev) => !prev);
           }}>
-          Edit
-        </button>
-        {editTodo && <input type="text" ref={editText} /> && (
+          {/* Edit */}
+        {/* </button> */} 
+        {/* {editTodo && <input type="text" ref={editText} /> && (
           <button
             onClick={() => {
               toEdit(
@@ -152,7 +152,7 @@ const Todos = (props) => {
             }}>
             Change
           </button>
-        )}
+        )} */}
       </div>
       {miniTodos.map((item, i) => (
         <Todo setTodoCLicked={setTodoCLicked} todo={item} key={i} />
@@ -171,17 +171,17 @@ function searchMe(setMiniTodos, value) {
 
 export default Todos;
 
-function toEdit(todoClicked, setTodoCLicked, setTodos, setEditodo, editText) {
-  if (todoClicked !== -1) {
-    // return;
-    setTodos((prev) => {
-      const todoEdit = [...prev].find((item) => item.id === todoClicked);
-      todoEdit.title = editText.current.value;
-      [...prev].splice(todoClicked - 1, 1);
-      return [...prev, todoEdit];
-    });
+// function toEdit(todoClicked, setTodoCLicked, setTodos, setEditodo, editText) {
+//   if (todoClicked !== -1) {
+//     // return;
+//     setTodos((prev) => {
+//       const todoEdit = [...prev].find((item) => item.id === todoClicked);
+//       todoEdit.title = editText.current.value;
+//       [...prev].splice(todoClicked - 1, 1);
+//       return [...prev, todoEdit];
+//     });
 
-    setEditodo(false);
-    setTodoCLicked(-1);
-  }
-}
+//     setEditodo(false);
+//     setTodoCLicked(-1);
+//   }
+// }
