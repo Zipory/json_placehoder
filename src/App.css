@@ -1,7 +1,11 @@
 .todo:active {
   border: 3px red solid;
 }
-.todo {
+.post:hover {
+  cursor: pointer;
+}
+.post {
+  border: black solid 3px;
 }
 .App {
   text-align: center;
