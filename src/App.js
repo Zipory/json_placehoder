@@ -8,7 +8,6 @@ import Posts from "./Posts";
 import Albums from "./Components/Albums";
 import Todos from "./Components/Todos";
 
-import NewTodo from "./Components/NewTodo";
 import Photos from "./Components/Photos";
 
 
