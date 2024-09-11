@@ -50,6 +50,9 @@ function App() {
             </Route>
 
 
+            <Route path="/todos" element={<Todos />} />
+            <Route path="/photos" element={<Photos /> } />
+           
             <Route path="*" element={<h1>Error 404 page not found</h1>} />
           </Routes>
           </AlbumId.Provider>

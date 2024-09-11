@@ -1,11 +1,14 @@
-.todo:active {
-  border: 3px red solid;
+.todo:focus {
+  border: 3px greenyellow solid;
 }
 .post:hover {
   cursor: pointer;
 }
 .post {
-  border: black solid 3px;
+  border: sandybrown solid 2px;;
+}
+.album {
+  border: sandybrown solid 2px;
 }
 .App {
   text-align: center;

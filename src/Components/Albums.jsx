@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import Fetch from "./fetch";
 import Album from "./Album";
 import { AlbumId } from "../App";
+
+// saving the prev length of the search bar.
 let prevLen = 0;
 
 const Albums = (props) => {
+  // the main state.
   const [albums, setAlbums] = useState([]);
+  //  to set the albumId when clicked on it.
+  const [albumId, setAlbumId] = useContext(AlbumId);
   const url = "https://jsonplaceholder.typicode.com/albums?userId=1";
 
   useEffect(() => {
@@ -37,17 +42,21 @@ const Albums = (props) => {
       <h1>Albums:</h1>
 
       {miniAlbums.map((item, i) => (
-        // TODO: the ?albumId=${item.id} is not work.
-        <Link className="link" to={`/photos?albumId=${item.id}`}> 
-          <Album album={item} key={i} onClick={() => {AlbumId[1](item.id)}}/>
+        <Link
+          className="link"
+          to={`/photos?album:${item.id}`}
+          onClick={() => setAlbumId(item.id)}
+          key={i}
+        >
+          <Album album={item} key={i} />
         </Link>
       ))}
     </div>
   );
 };
 
-function searchMe(setMiniTodos, value) {
-  setMiniTodos((prev) =>
+function searchMe(setMiniAlbums, value) {
+  setMiniAlbums((prev) =>
     [...prev]?.filter(
       (item) => item.title?.includes(value) || `${item.id}`.includes(value)
     )
