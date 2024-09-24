@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
-import Post from "./Post";
+
+let temp = null;
 const NewPost = (props) => {
   const setPosts = props.setPosts;
   const id = props.length;
+  const posts = props.posts;
 
   let title = useRef("");
   let body = useRef("");
+
   return (
     <>
       <h2>New Post</h2>
@@ -13,17 +16,15 @@ const NewPost = (props) => {
       <input ref={body} type="text" placeholder="Enter a body" />
       <button
         onClick={() => {
-          const temp = (
-            <Post
-              title={title.current.value}
-              body={body.current.value}
-              id={id + 1}
-              key={id + 1}
-            />
-          );
-          console.log(title.current.value);
+          temp = {
+            title: title.current.value,
+            body: body.current.value,
+            id: id,
+          };
 
-          //   return;
+          console.log("im temp: ", temp);
+
+          console.log(title.current.value);
 
           setPosts((prev) => [...prev, temp]);
         }}>

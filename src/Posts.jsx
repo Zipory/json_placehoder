@@ -25,8 +25,6 @@ const Posts = () => {
       <h1>Posts</h1>
       <input
         onChange={() => {
-          // console.log(search.current.value);
-
           if (search.current.value.length < prevLen) {
             setMiniPosts(() => [...posts]);
           }
@@ -42,9 +40,11 @@ const Posts = () => {
           // setEditodo(false);
           setNewPost(!newPost);
         }}>
-        Creat New Todo
+        Creat New Post
       </button>
-      {newPost && <NewPost setPosts={setPosts} length={posts.length + 1} />}
+      {newPost && (
+        <NewPost setPosts={setPosts} length={posts.length + 1} posts={posts} />
+      )}
       {miniPosts.map((post) => (
         <Post title={post.title} body={post.body} key={post.id} id={post.id} />
       ))}
